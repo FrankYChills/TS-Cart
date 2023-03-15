@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "sku": "item01",
+      "name": "iPhone 14 Pro Max",
+      "price": 1029
+    },
+    {
+      "sku": "item02",
+      "name": "Samsung Galaxy S22 Ultra 5G",
+      "price": 1040
+    },
+    {
+      "sku": "item03",
+      "name": "Croma Smart TV",
+      "price": 224
+    }
+  ]
+}
