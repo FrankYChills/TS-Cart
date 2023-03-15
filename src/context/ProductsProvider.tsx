@@ -7,31 +7,31 @@ export type ProductType = {
 };
 
 // basic state data - method 2
-const initState: ProductType[] = [];
+// const initState: ProductType[] = [];
 
 // basic state data - method2
-// const initState: ProductType[] = [
-//   {
-//     sku: "item01",
-//     name: "iPhone 14 Pro Max",
-//     price: 1029,
-//   },
-//   {
-//     sku: "item02",
-//     name: "Samsung Galaxy S22 Ultra 5G",
-//     price: 1040,
-//   },
-//   {
-//     sku: "item03",
-//     name: "Croma Smart TV",
-//     price: 224,
-//   },
-// ];
+const initState: ProductType[] = [
+  {
+    sku: "item01",
+    name: "iPhone 14 Pro Max",
+    price: 1029,
+  },
+  {
+    sku: "item02",
+    name: "Samsung Galaxy S22 Ultra 5G",
+    price: 1040,
+  },
+  {
+    sku: "item03",
+    name: "Croma Smart TV",
+    price: 224,
+  },
+];
 
 // type of context
 export type UseProductsContextType = { products: ProductType[] };
 
-// define initial context state
+// define initial context structure
 const initContextState: UseProductsContextType = { products: [] };
 
 // create a context with an initial state
@@ -47,22 +47,23 @@ type ChildrenType = {
 export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
   const [products, setProducts] = useState<ProductType[]>(initState);
 
-  useEffect(() => {
-    const fetchProducts = async (): Promise<ProductType[]> => {
-      const data = await fetch("http://localhost:6900/products")
-        .then((res) => {
-          return res.json();
-        })
-        .catch((err) => {
-          if (err instanceof Error) {
-            console.log(err);
-          }
-        });
-      console.log("data: ", data);
-      return data;
-    };
-    fetchProducts().then((products) => setProducts(products));
-  });
+  // useEffect(() => {
+  //   const fetchProducts = async (): Promise<ProductType[]> => {
+  //     const data = await fetch("http://localhost:6900/products")
+  //       .then((res) => {
+  //         return res.json();
+  //       })
+  //       .catch((err) => {
+  //         if (err instanceof Error) {
+  //           console.log(err);
+  //         }
+  //       });
+  //     console.log("data: ", data);
+  //     return data;
+  //   };
+  //   fetchProducts().then((products) => setProducts(products));
+  // }, []);
+
   return (
     <ProductsContext.Provider value={{ products }}>
       {children}

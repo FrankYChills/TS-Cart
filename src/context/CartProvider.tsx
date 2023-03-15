@@ -127,13 +127,13 @@ const useCartContext = (initCartState: CartStateType) => {
   return { dispatch, totalItems, totalPrice, cart };
 };
 
-type initCartContextStateType = ReturnType<typeof useCartContext>;
+export type initCartContextStateType = ReturnType<typeof useCartContext>;
 
 // Now create a inital context structure
 const initCartContextState: initCartContextStateType = {
   dispatch: () => {},
-  totalItems: 0,
-  totalPrice: "",
+  totalItems: 10,
+  totalPrice: "hello",
   cart: [],
 };
 
