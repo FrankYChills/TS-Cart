@@ -1,4 +1,7 @@
-import { useReducer } from "react";
+import { Children, createContext, ReactElement, useReducer } from "react";
+
+// IMPORTANT - State only has data while a Context has state and function to update the state
+// Initial Context should define the structure of the context
 
 export type CartItemType = {
   sku: string;
@@ -96,7 +99,7 @@ const reducer = (state: CartStateType, action: ActionType): CartStateType => {
   }
 };
 
-// define state and reducer to update the state so that it can be accessed from outside
+// define state and reducer aka a custom hook to update the state so that it can be accessed from outside
 const useCartContext = (initCartState: CartStateType) => {
   const [state, dispatch] = useReducer(reducer, initCartState);
 
@@ -122,4 +125,32 @@ const useCartContext = (initCartState: CartStateType) => {
 
   //return function and state
   return { dispatch, totalItems, totalPrice, cart };
+};
+
+type initCartContextStateType = ReturnType<typeof useCartContext>;
+
+// Now create a inital context structure
+const initCartContextState: initCartContextStateType = {
+  dispatch: () => {},
+  totalItems: 0,
+  totalPrice: "",
+  cart: [],
+};
+
+//finally create a context
+export const cartContext =
+  createContext<initCartContextStateType>(initCartContextState);
+
+// define children type
+type ChildrenType = {
+  children?: ReactElement | ReactElement[] | undefined;
+};
+
+// define provider which encapsulates children to provide them state which is value here
+export const CartProvider = ({ children }: ChildrenType): ReactElement => {
+  return (
+    <cartContext.Provider value={useCartContext(initCartState)}>
+      {children}
+    </cartContext.Provider>
+  );
 };
