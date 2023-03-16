@@ -37,7 +37,47 @@ const CartLineItem = ({ item, dispatch }: CartLineItemProps) => {
   const onRemoveFromCart = () =>
     dispatch({ type: REDUCER_ACTION_TYPE.REMOVE, payload: item });
 
-  return <div>CartLineItem</div>;
+  const content = (
+    <li className="cart__item">
+      <img className="cart__img" src={img} />
+      <div aria-label="Item Name">{item.name}</div>
+      <div aria-label="Price Per Item">
+        {new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(item.price)}
+      </div>
+      <label htmlFor="itemQty" className="offscreen">
+        Item Quantity
+      </label>
+      <select
+        name="itemQty"
+        id="itemQty"
+        className="cart__select"
+        value={item.qty}
+        aria-label="Item Quantity"
+        onChange={onChangeQty}
+      >
+        {options}
+      </select>
+      <div className="cart__item-subtotal" aria-label="Line Item Subtotal">
+        {new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(lineTotal)}
+      </div>
+      <button
+        className="cart__button"
+        aria-label="Remove Item From Cart"
+        title="Remove Item from cart"
+        onClick={onRemoveFromCart}
+      >
+        ❌
+      </button>
+    </li>
+  );
+
+  return content;
 };
 
 export default CartLineItem;
