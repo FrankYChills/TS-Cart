@@ -20,13 +20,13 @@ const initCartState: CartStateType = {
 };
 
 // action for reducers
-const enum REDUCER_ACTION_TYPE {
+export const enum REDUCER_ACTION_TYPE {
   ADD,
   REMOVE,
   QUANTITY,
   SUBMIT,
 }
-type ActionType = {
+export type ActionType = {
   type: REDUCER_ACTION_TYPE;
   payload?: CartItemType;
 };
